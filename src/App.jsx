@@ -194,7 +194,7 @@ const Hero = () => (
           <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-blue-500/20 rounded-[2.5rem] blur-2xl"></div>
           <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/50">
             <img 
-              src="/hero_cybersecurity_premium_1776956790556.png" 
+              src="/hero_cybersecurity.png"
               alt="Premium Cybersecurity Visualization" 
               className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
             />
@@ -381,31 +381,65 @@ const WhyAxcelNet = () => {
 
 const WhoWeServe = () => {
   const industries = [
-    { name: 'Healthcare', icon: <Hospital className="h-6 w-6" />, desc: 'Protecting patient data and HIPAA compliance for medical practices.' },
-    { name: 'Legal', icon: <Scale className="h-6 w-6" />, desc: 'Securing attorney-client privilege and confidential case files.' },
-    { name: 'Automotive', icon: <Car className="h-6 w-6" />, desc: 'Protecting dealership operations and consumer financial data.' },
-    { name: 'Finance', icon: <Building2 className="h-6 w-6" />, desc: 'Robust security for financial services firms and wealth managers.' },
-    { name: 'Government', icon: <Briefcase className="h-6 w-6" />, desc: 'Compliance-ready systems for federal and state contractors.' },
-    { name: 'Engineering', icon: <Building2 className="h-6 w-6" />, desc: 'Securing intellectual property for construction and engineering.' },
+    { name: 'Healthcare', icon: <Hospital className="h-8 w-8" />, desc: 'Protecting patient data and HIPAA compliance for medical practices.', color: 'from-blue-400 to-blue-600' },
+    { name: 'Legal', icon: <Scale className="h-8 w-8" />, desc: 'Securing attorney-client privilege and confidential case files.', color: 'from-amber-400 to-amber-600' },
+    { name: 'Automotive', icon: <Car className="h-8 w-8" />, desc: 'Protecting dealership operations and consumer financial data.', color: 'from-rose-400 to-rose-600' },
+    { name: 'Finance', icon: <Landmark className="h-8 w-8" />, desc: 'Robust security for financial services firms and wealth managers.', color: 'from-emerald-400 to-emerald-600' },
+    { name: 'Government', icon: <Briefcase className="h-8 w-8" />, desc: 'Compliance-ready systems for federal and state contractors.', color: 'from-purple-400 to-purple-600' },
+    { name: 'Engineering', icon: <Building2 className="h-8 w-8" />, desc: 'Securing intellectual property for construction and engineering.', color: 'from-cyan-400 to-cyan-600' },
   ];
 
   return (
-    <section id="serve" className="section-padding bg-slate-50">
-      <div className="container-custom">
+    <section id="serve" className="section-padding relative bg-slate-50 overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-pink-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
+      
+      <div className="container-custom relative z-10">
         <SectionTitle 
           title="Who We Serve" 
           subtitle="Specialized Support for Regulated Industries" 
           centered 
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {industries.map(industry => (
-            <div key={industry.name} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="mb-4 text-blue-600 font-bold flex items-center space-x-3">
-                <div className="p-2 bg-blue-50 rounded-lg">{industry.icon}</div>
-                <span className="text-xl uppercase tracking-tighter">{industry.name}</span>
+          {industries.map((industry, idx) => (
+            <motion.div 
+              key={industry.name} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer"
+            >
+              {/* Card Hover Gradient Background */}
+              <div className={cn(
+                "absolute top-0 left-0 w-full h-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r",
+                industry.color
+              )}></div>
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div className={cn(
+                  "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg bg-gradient-to-br",
+                  industry.color
+                )}>
+                  {industry.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                  {industry.name}
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-8 flex-grow">
+                  {industry.desc}
+                </p>
+                <div className="flex items-center text-sm font-bold text-blue-600 uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                  Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <p className="text-gray-600">{industry.desc}</p>
-            </div>
+
+              {/* Decorative Watermark Icon */}
+              <div className="absolute -bottom-6 -right-6 opacity-[0.03] text-gray-900 group-hover:scale-110 group-hover:opacity-[0.05] transition-all duration-500 pointer-events-none">
+                {React.cloneElement(industry.icon, { className: "w-48 h-48" })}
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
