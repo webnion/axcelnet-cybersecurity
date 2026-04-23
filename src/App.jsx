@@ -555,21 +555,105 @@ const CaseStudies = () => {
 };
 
 const Certifications = () => {
-  const certs = [
-    { name: 'NMSDC MBE', src: 'https://nmsdc.org/wp-content/uploads/2022/10/NMSDC-Logo.png' },
-    { name: 'WOSB', src: 'https://images.squarespace-cdn.com/content/v1/5e5d36009f98455e8f4955b9/1585860741285-L6R8Z8QZ8X0P9X8Z8Z8Z/WOSB+Logo.png' },
-    { name: 'WBE', src: 'https://www.wbenc.org/wp-content/uploads/2019/12/wbenc-seal.png' },
-  ];
-
   return (
-    <section className="py-12 bg-white">
-      <div className="container-custom">
-        <p className="text-center text-sm font-bold text-gray-400 uppercase tracking-[0.2em] mb-10">Trusted & Certified for Excellence</p>
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-           {/* Placeholders for logos since URLs might be dead in demo. I'll use generic styled text/shapes to represent them cleanly */}
-           {['SBA WOSB Certified', 'NMSDC Member', 'CISSP Certified Leadership', 'AWS Certified Experts', 'SBSD Approved'].map(cert => (
-             <span key={cert} className="text-xl font-bold text-gray-800 tracking-tighter border-b-2 border-blue-100">{cert}</span>
-           ))}
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Background accents */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-blue-50 rounded-full blur-[100px] opacity-40 -z-10"></div>
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-pink-50 rounded-full blur-[100px] opacity-40 -z-10"></div>
+
+      <div className="container-custom relative z-10">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm font-bold text-blue-600 uppercase tracking-[0.3em] mb-4"
+          >
+            Excellence Recognized
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tighter leading-tight"
+          >
+            Trusted & Certified for <span className="text-gradient">Excellence</span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-gray-600 font-medium"
+          >
+            Our commitment to quality and security is backed by industry-leading certifications and memberships.
+          </motion.p>
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative group"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-pink-500/5 rounded-[3rem] blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+          <div className="relative bg-white border border-gray-100 rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-gray-200/50 overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+               <div className="w-full lg:w-[45%]">
+                  <div className="relative">
+                    <div className="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-pink-100 rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    <img 
+                      src="/certification_badges.png" 
+                      alt="AxcelNet Certifications" 
+                      className="relative w-full h-auto rounded-2xl shadow-lg border border-white transform hover:rotate-1 transition-transform duration-500"
+                    />
+                  </div>
+               </div>
+               <div className="w-full lg:w-[50%] space-y-8">
+                  <h3 className="text-2xl font-bold text-gray-900 tracking-tight">Accredited Excellence</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                    {[
+                      { t: 'SBA WOSB Certified', d: 'Women-Owned Small Business' },
+                      { t: 'NMSDC Member', d: 'Minority Supplier Development' },
+                      { t: 'CISSP Certified', d: 'Information Security Professional' },
+                      { t: 'AWS Certified Security', d: 'Cloud Security Specialists' }
+                    ].map((c, i) => (
+                      <div key={i} className="flex items-center p-5 rounded-2xl bg-slate-50/50 border border-transparent hover:border-blue-100 hover:bg-white hover:shadow-xl transition-all duration-300 group/item">
+                        <div className="h-10 w-10 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:scale-110 transition-transform">
+                          <ShieldCheck className="h-5 w-5 text-blue-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-gray-900 uppercase tracking-tight text-xs mb-0.5">{c.t}</h4>
+                          <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{c.d}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+               </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Industry Standards Cloud */}
+        <div className="mt-24 pt-16 border-t border-gray-100">
+           <p className="text-center text-[10px] font-black text-blue-400 uppercase tracking-[0.4em] mb-12">Compliance & Global Standards</p>
+           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+              {['HIPAA', 'GDPR', 'NIST', 'SOC2', 'PCI-DSS', 'ISO 27001'].map((std, i) => (
+                <motion.span 
+                  key={std} 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.3 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ opacity: 1, scale: 1.1, color: '#2563eb' }}
+                  className="text-2xl md:text-4xl font-black text-gray-900 tracking-tighter transition-all cursor-default"
+                >
+                  {std}
+                </motion.span>
+              ))}
+           </div>
         </div>
       </div>
     </section>
